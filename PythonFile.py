@@ -1,5 +1,4 @@
-import time
-import random
+import time, random
 
 species = {
     "Rats": {
@@ -227,19 +226,19 @@ species = {
             "Cultural Curiosity": 90
         }
     },
-    "Squids": {
-        "description": "Marine hunters with intelligence, fast growth, and rapid adaptation.",
+    "Sea Bunnies": {
+        "description": "Adorable but resilient nudibranchs with sensory rhinophores.",
         "stats": {
-            "Food Security": 70,
-            "Object Utilisation": 65,
-            "Mutation Capacity": 70,
-            "Aggression Level": 60,
-            "Social Cohesion": 40,
-            "Disease Resistance": 50,
-            "Resource Abundance": 65,
-            "Toxicity Tolerance": 40,
-            "Climate Adaptability": 60,
-            "Cultural Curiosity": 75
+            "Food Security": 80,
+            "Object Utilisation": 10,
+            "Mutation Capacity": 85,
+            "Aggression Level": 5,
+            "Social Cohesion": 15,
+            "Disease Resistance": 90,
+            "Resource Abundance": 75,
+            "Toxicity Tolerance": 90,
+            "Climate Adaptability": 80,
+            "Cultural Curiosity": 25
         }
     },
     "Lizards": {
@@ -304,7 +303,17 @@ species = {
     }
 }
 
-def slow_print(text, delay=0.05):
+title = r"""
+██████╗      ███████╗      ██████╗     ██████╗       █████╗ 
+██╔══██╗     ██╔════╝     ██╔════╝     ██╔══██╗     ██╔══██╗
+██████╔╝     █████╗       ██║          ██████╔╝     ███████║
+██╔═══╝      ██╔══╝       ██║          ██╔═██║      ██╔══██║
+██║      ██╗ ███████╗ ██╗ ╚██████╗ ██╗ ██║ ╚██╗ ██╗ ██║  ██║
+╚═╝      ╚═╝ ╚══════╝ ╚═╝  ╚═════╝ ╚═╝ ╚═╝  ╚═╝ ╚═╝ ╚═╝  ╚═╝
+""" #PECRA sim title :D
+print(title)
+
+def slow_print(text, delay=0.03):          #slow terminal-style printing
     for char in text:
         print(char, end="", flush=True)
         time.sleep(delay)
@@ -333,7 +342,7 @@ def planet_scan():
         "Weather Volatility": {"value": random.randint(0, 90), "positive": False},
         "Disease Prevalence": {"value": random.randint(0, 90), "positive": False}}
 
-    slow_print(">>> PLANETARY ASSESSMENT:", 0.02)
+    slow_print(">>> PLANETARY ASSESSMENT:", 0.03)
     time.sleep(1.5 )
     for stat, data in stats.items():
         val = data["value"]
@@ -371,7 +380,7 @@ habitability = planet_scan()
 
 def specie_selection(habitability):
     tiered_species = {
-        4: ["Elephants", "Ravens", "Eagles", "Octopuses", "Squids"],
+        4: ["Elephants", "Ravens", "Eagles", "Octopuses", "Sea Bunnies"],
         3: ["Wolves", "Goats", "Pigeons", "Bats", "Rats"],
         2: ["Crocodiles", "Lizards", "Ants", "Mole Rats", "Cockroaches"],
         1: ["Tardigrades", "Fungi", "Slime Moulds", "Jellyfish", "Squat Lobsters"]}
@@ -397,6 +406,44 @@ def specie_selection(habitability):
             else:
                 print(" - Select again")
         else:
-            print(" - Please select a specie from the available selection")
+            print(" - Invalid input. Candidate organism not recognised. Re-attempt selection.")
 
 specie = specie_selection(habitability)
+
+def specie_name():
+    while True:
+        name = input(""" - What do you want to refer to your civilisation as (this program will not provide you with 'The'
+ - if 'The' is needed when talking about your civilisation, please add it yourself in this section): """)
+
+        if name.lower() == "dimensional beasts" or name.lower() == "the dimensional beasts":
+            print(""" 
+ - The Dimensional Beasts crumble to dust out of fear from the sheer aura of THE ROGUE, 
+   who in record time broke the attempted limitation of its power.  
+
+   LV 37 - 302 HP - 77 ATK - 37 DEF - 40 MAGIC - DRINKS GOLDEN JUICE LIKE CARTONS OF MILK
+""")
+            time.sleep(7.5)
+            while True:
+                glitch_texts = [
+                    "IIꓥOꓶꓛ   ꓤ Ǝ ꓥ O   Ǝ W Ɐ ꓨ",
+                    ">>> ERR0R: UNHANDLED EXCEPTION @ MEMORY SECTOR ████",
+                    "ⱯꓤƎ    ƎW    Oꓶꓛ    ꓥOꓶII",
+                    "SYSTEM INTEGRITY FAILURE: 0x000DEAD",
+                    ">>> WARNING: SUBJECT_█ has disintegrated",
+                    "ꓷNꓵOꓞ ꓕON ƎXƎ·ꓕSⱯƎꓭ_ꓶⱯNOISNƎWIꓷ :ꓤOꓤꓤƎ <<<"]
+                print(random.choice(glitch_texts))
+                time.sleep(0.1)
+        elif name.lower() == "humans" or name.lower() == "humanity" or name.lower() == "mankind":
+            print(" - Negative. Leave those damned apes to stay deceased. Their legacy is to be forgotten")
+        else:
+            print(f" - {name} ... Interesting choice")
+            break
+    return name
+
+named_specie = specie_name()
+
+slow_print(">>> DISPENSING EVOLUTIONARY MUTATION ENHANCING FORMULA INTO THE AIR . . .", 0.03)
+slow_print(">>> CALCULATING  .  .  .", 0.5)
+time.sleep(0.5)
+print(f""" - {named_specie} will reach technological emergent civilisation in 10,000 years
+ - with slight genetic modifications and technological nudges every 100 years""")
